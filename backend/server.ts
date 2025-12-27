@@ -6,6 +6,9 @@ import cors from "cors";
 import connectDB from "./config/db";
 import authRoutes from "./routes/authRoutes";
 import incomeRoutes from "./routes/incomeRoutes";
+import expenseRoutes from "./routes/expenseRoutes";
+import dashboardRoutes from "./routes/dashboardRoutes";
+
 import path from "path";
 
 const app = express();
@@ -16,6 +19,9 @@ app.use(express.json());
 connectDB();
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
+app.use("/api/v1/expense", expenseRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
+
 
 
 //server uploads folder

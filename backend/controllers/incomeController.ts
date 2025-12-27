@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Income from "../models/Income";
+import xlsx from "xlsx";
 
 // add income source
 export const addIncome = async (req:Request, res:Response) => {
@@ -50,4 +51,24 @@ export const deleteIncome = async (req:Request, res:Response) => {
 }
 
 // download excel
-export const downloadIncomeExcel = async (req:Request, res:Response) => {}
+export const downloadIncomeExcel = async (req: Request, res: Response) => {
+    const userId = (req as any).user.id;
+    try {
+        const income = await Income.find({ userId }).sort({ date: -1 });
+
+        const data = income.map((item) => ({
+            Source: item.source,
+            Amount: item.amount,
+            Date: item.date,
+        }));
+
+        const wb = xlsx.utils.book_new();
+        const ws = xlsx.utils.json_to_sheet(data);
+        xlsx.utils.book_append_sheet(wb, ws, "Income");
+
+        xlsx.writeFile(wb, "income_details.xlsx");
+        res.download("income_details.xlsx");
+    } catch (err: any) {
+        res.status(500).json({ message: "Server Error" });
+    }
+};
