@@ -31,3 +31,16 @@ export const addThousandsSeparator = (num: number | null | undefined): string =>
     ? `${formattedInteger}.${fractionalPart}`
     : formattedInteger;
 };
+
+
+interface ExpenseItem {
+  category?: string;
+  amount?: number;
+}
+
+export const prepareExpenseBarChartData = (data: ExpenseItem[] = []) => {
+  return data.map((item) => ({
+    category: item.category,
+    amount: item.amount,
+  }));
+};
