@@ -12,6 +12,8 @@ import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 import ExpenseTransactions from "./ExpenseTransactions";
 import Last30DaysExpenses from "./Last30DaysExpenses";
+import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
+import RecentIncome from "./RecentIncome";
 
 // Define the shape of dashboardData
 interface DashboardData {
@@ -55,7 +57,7 @@ const Home: React.FC = () => {
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
-        {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
@@ -76,10 +78,10 @@ const Home: React.FC = () => {
             value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
             color="bg-red-500"
           />
-        </div>*/}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          {/*<RecentTransactions
+          <RecentTransactions
             transactions={dashboardData?.recentTransactions || []}
             onSeeMore={() => navigate("/expense")}
           />
@@ -88,7 +90,7 @@ const Home: React.FC = () => {
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpense={dashboardData?.totalExpense || 0}
-          />*/}
+          />
 
           <ExpenseTransactions
             transactions={dashboardData?.last30DaysExpenses?.transactions || []}
@@ -97,6 +99,18 @@ const Home: React.FC = () => {
 
           <Last30DaysExpenses
             data={dashboardData?.last30DaysExpenses?.transactions || []}
+          />
+
+          <RecentIncomeWithChart
+            data={
+              dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []
+            }
+            totalIncome={dashboardData?.totalIncome || 0}
+          />
+
+          <RecentIncome
+            transactions={dashboardData?.last60DaysIncome?.transactions || []}
+            onSeeMore={() => navigate("/income")}
           />
         </div>
       </div>

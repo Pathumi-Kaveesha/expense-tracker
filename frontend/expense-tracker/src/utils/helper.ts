@@ -1,3 +1,5 @@
+import moment from "moment";
+
 // Validate email format
 export const validateEmail = (email: string): boolean => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,4 +45,29 @@ export const prepareExpenseBarChartData = (data: ExpenseItem[] = []) => {
     category: item.category,
     amount: item.amount,
   }));
+};
+
+
+interface IncomeTransaction {
+  _id: string;
+  source: string;
+  date: string;
+  amount: number;
+}
+
+
+export const prepareIncomeBarChartData = (data: IncomeTransaction[] = []) => {
+  // Sort by date ascending
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  // Map to chart format
+  const chartData = sortedData.map((item) => ({
+    month: moment(item.date).format("Do MMM"), // e.g., 29 Dec
+    amount: item.amount,
+    source: item.source,
+  }));
+
+  return chartData;
 };
