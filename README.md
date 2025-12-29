@@ -23,3 +23,14 @@ Track your income & expenses, visualize your finances with interactive charts, a
 - Database: MongoDB
 - Authentication: JWT
 - Charts & Reports: Chart.js, ExcelJS
+
+
+🎥 Project Reference
+
+This project was developed by following and learning from the tutorial below.  
+All credits for the original idea and guidance go to the content creator.
+
+👉 YouTube Tutorial:  
+https://youtu.be/PQnbtnsYUho?si=GhYqeP8VJuTHw1gm
+
+The project was built for learning purposes and extended with my own understanding and implementation.
