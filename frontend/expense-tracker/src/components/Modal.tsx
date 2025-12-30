@@ -1,7 +1,7 @@
 import React from "react";
 
 interface ModalProps {
-  children: any; // no ReactNode or JSX.Element
+  children: any;
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -11,26 +11,17 @@ const Modal = ({ children, isOpen, onClose, title }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-[calc(100%-1rem)] max-h-full overflow-y-auto overflow-x-hidden bg-black/20">
-      <div className="relative p-4 w-full max-w-2xl max-h-full">
-        {/* Modal content */}
-        <div className="relative bg-white rounded-lg shadow-sm">
-          {/* Modal header */}
-          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+    <div className="fixed inset-0 z-[999] flex justify-center items-center w-full h-full overflow-y-auto bg-black/50 backdrop-blur-sm">
+      <div className="relative p-4 w-full max-w-2xl">
+        <div className="relative bg-white rounded-lg shadow-xl">
+          <div className="flex items-center justify-between p-4 border-b rounded-t">
             <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-
             <button
               type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center cursor-pointer"
+              className="text-gray-400 hover:bg-gray-100 hover:text-gray-900 rounded-lg p-2 transition-colors"
               onClick={onClose}
             >
-              <svg
-                className="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 16"
-              >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 16 16">
                 <path
                   stroke="currentColor"
                   strokeLinecap="round"
@@ -41,11 +32,7 @@ const Modal = ({ children, isOpen, onClose, title }: ModalProps) => {
               </svg>
             </button>
           </div>
-
-          {/* Modal body with white background */}
-          <div className="p-4 md:p-5 space-y-4 bg-white rounded-b-lg">
-            {children}
-          </div>
+          <div className="p-6 bg-white rounded-b-lg">{children}</div>
         </div>
       </div>
     </div>

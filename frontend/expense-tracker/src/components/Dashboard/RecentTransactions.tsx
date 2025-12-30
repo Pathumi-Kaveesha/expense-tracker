@@ -6,11 +6,13 @@ import TransactionInfoCard from "../Cards/TransactionInfoCard";
 interface RecentTransactionsProps {
   transactions: any[];
   onSeeMore: () => void;
+  onDeleteTransaction: (id: string) => void; // new prop for delete
 }
 
 const RecentTransactions: React.FC<RecentTransactionsProps> = ({
   transactions,
   onSeeMore,
+  onDeleteTransaction,
 }) => {
   return (
     <div className="card">
@@ -22,16 +24,16 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({
         </button>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 flex flex-col gap-3">
         {transactions?.slice(0, 5)?.map((item) => (
           <TransactionInfoCard
             key={item._id}
-            title={item.type == "expense" ? item.category : item.source}
+            title={item.type === "expense" ? item.category : item.source}
             icon={item.icon}
             date={moment(item.date).format("Do MMM YYYY")}
             amount={item.amount}
             type={item.type}
-            hideDeleteBtn
+            onDelete={() => onDeleteTransaction(item._id)}
           />
         ))}
       </div>

@@ -7,7 +7,7 @@ import moment from "moment";
 interface IncomeTransaction {
   _id: string;
   source: string;
-  icon?: React.ReactNode;
+  icon?: any;
   date: string;
   amount: number;
 }

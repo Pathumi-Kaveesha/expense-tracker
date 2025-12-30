@@ -84,6 +84,7 @@ const Home: React.FC = () => {
           <RecentTransactions
             transactions={dashboardData?.recentTransactions || []}
             onSeeMore={() => navigate("/expense")}
+            onDeleteTransaction={(id) => console.log("Delete clicked for:", id)}
           />
 
           <FinanceOverview

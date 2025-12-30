@@ -71,3 +71,24 @@ export const prepareIncomeBarChartData = (data: IncomeTransaction[] = []) => {
 
   return chartData;
 };
+
+
+interface ExpenseTransaction {
+  _id: string;
+  category: string;
+  date: string;
+  amount: number;
+}
+
+export const prepareExpenseLineChartData = (data: ExpenseTransaction[] = []) => {
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );  
+
+  const chartData = sortedData.map((item) => ({
+    date : moment(item?.date).format("Do MMM"),
+    amount: item?.amount,
+    category: item?.category
+  }));
+  return chartData;
+}
